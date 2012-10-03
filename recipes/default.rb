@@ -60,6 +60,7 @@ when false
 end
 
 service "ganglia-monitor" do
+  service_name "gmond" if platform?( "amazon" )
   pattern "gmond"
   supports :restart => true
   action [ :enable, :start ]
