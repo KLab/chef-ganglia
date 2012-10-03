@@ -1,16 +1,18 @@
 directory "/etc/ganglia-webfrontend"
 
 case node[:platform]
-when "ubuntu", "debian", "amazon"
-  if node[:platform] == "amazon" then
-    package "ganglia-web"
-  else
-    package "ganglia-webfrontend"
-  end
+when "ubuntu", "debian"
+  package "ganglia-webfrontend"
 
   link "/etc/apache2/sites-enabled/ganglia" do
-    target_file "/etc/httpd/sites-enabled/ganglia" if platform?( "amazon" )
     to "/etc/ganglia-webfrontend/apache.conf"
+    notifies :restart, "service[apache2]"
+  end
+
+when "amazon"
+  package "ganglia-web"
+  link "/etc/httpd/sites-enabled/ganglia" do
+    to "/etc/httpd/conf.d/ganglia.conf"
     notifies :restart, "service[apache2]"
   end
 
