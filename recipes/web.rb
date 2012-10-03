@@ -3,7 +3,7 @@ directory "/etc/ganglia-webfrontend"
 case node[:platform]
 when "ubuntu", "debian", "amazon"
   if node[:platform] == "amazon" then
-    pacakge "ganglia-web"
+    package "ganglia-web"
   else
     package "ganglia-webfrontend"
   end
