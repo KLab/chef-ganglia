@@ -1,6 +1,8 @@
 case node[:platform]
 when "ubuntu", "debian"
   package "gmetad"
+when "amazon"
+  pacakge "ganglia-gmetad"
 when "redhat", "centos", "fedora"
   include_recipe "ganglia::source"
   execute "copy gmetad init script" do

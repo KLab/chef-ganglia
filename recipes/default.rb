@@ -20,6 +20,10 @@
 case node[:platform]
 when "ubuntu", "debian"
   package "ganglia-monitor"
+when "amazon"
+  package "ganglia-gmond"
+  package "ganglia-gmond-python"
+  package "ganglia-devel"
 when "redhat", "centos", "fedora"
   include_recipe "ganglia::source"
 

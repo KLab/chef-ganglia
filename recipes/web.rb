@@ -1,8 +1,12 @@
 directory "/etc/ganglia-webfrontend"
 
 case node[:platform]
-when "ubuntu", "debian"
-  package "ganglia-webfrontend"
+when "ubuntu", "debian", "amazon"
+  if node[:platform] == "amazon" then
+    pacakge "ganglia-web"
+  else
+    package "ganglia-webfrontend"
+  end
 
   link "/etc/apache2/sites-enabled/ganglia" do
     to "/etc/ganglia-webfrontend/apache.conf"
