@@ -9,6 +9,7 @@ when "ubuntu", "debian", "amazon"
   end
 
   link "/etc/apache2/sites-enabled/ganglia" do
+    target_file "/etc/httpd/sites-enabled/ganglia" if platform?( "amazon" )
     to "/etc/ganglia-webfrontend/apache.conf"
     notifies :restart, "service[apache2]"
   end
