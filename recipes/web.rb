@@ -11,10 +11,10 @@ when "ubuntu", "debian"
 
 when "amazon"
   package "ganglia-web"
-  link "/etc/httpd/sites-enabled/ganglia" do
-    to "/etc/httpd/conf.d/ganglia.conf"
-    notifies :restart, "service[apache2]"
-  end
+#  link "/etc/httpd/sites-enabled/ganglia" do
+#    to "/etc/httpd/conf.d/ganglia.conf"
+#    notifies :restart, "service[apache2]"
+#  end
 
 when "redhat", "centos", "fedora"
   package "httpd"
@@ -30,7 +30,7 @@ when "redhat", "centos", "fedora"
 end
 
 service "apache2" do
-  service_name "httpd" if platform?( "redhat", "centos", "fedora" )
+  service_name "httpd" if platform?( "redhat", "centos", "fedora", "amazon" )
   supports :status => true, :restart => true, :reload => true
   action [ :enable, :start ]
 end

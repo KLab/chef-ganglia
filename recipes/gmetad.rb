@@ -14,7 +14,11 @@ when "redhat", "centos", "fedora"
 end
 
 directory "/var/lib/ganglia/rrds" do
-  owner "nobody"
+  if node[:platform] == 'amazon':
+      owner "ganglia"
+    else
+      owner "nobody"
+  end
   recursive true
 end
 
